@@ -18,11 +18,3 @@ https://github.com/t0mm4rx/ft_services
 
 https://gitlab.com/bccyv/ft_services/-/blob/master/setup.sh
 
-And this will produce a flow chart:
-
-```mermaid
-graph LR
-A[Square Rect] -- Link text --> B((Circle))
-A --> C(Round Rect)
-B --> D{Rhombus}
-C --> D
