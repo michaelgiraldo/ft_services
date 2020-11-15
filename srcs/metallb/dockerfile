@@ -1,0 +1,4 @@
+FROM		ft_alpine:telegraf
+LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
+RUN			apk update && apk upgrade && apk add --no-cache  mysql-client
+ENTRYPOINT	["mysql"]

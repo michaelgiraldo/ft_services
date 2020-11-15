@@ -1,0 +1,14 @@
+# https://github.com/influxdata/influxdata-docker/tree/358892ce07e5cebfd7b3b46d033471154808fa54/telegraf/1.16/alpine
+
+FROM		alpine:edge
+
+RUN 		echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+RUN			echo 'hosts: files dns' >> /etc/nsswitch.conf
+RUN			apk update && apk upgrade && apk add --no-cache \
+			iputils \
+			net-snmp-tools \
+			procps lm_sensors \
+			tzdata \
+			telegraf
+
+EXPOSE 		8125/udp 8092/udp 8094

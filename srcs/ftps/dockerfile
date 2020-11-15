@@ -1,0 +1,9 @@
+FROM		ft_alpine:telegraf
+LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
+RUN			apk update && apk upgrade && apk add --no-cache vsftpd
+ENTRYPOINT	["vsftpd"]
+EXPOSE		21
+
+# https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management#Upgrade_a_Running_System
+# https://pkgs.alpinelinux.org/packages?name=telegraf&branch=edge&arch=x86_64
+# https://pkgs.alpinelinux.org/packages?name=vsftpd&branch=edge&arch=x86_64

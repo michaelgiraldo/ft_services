@@ -1,0 +1,11 @@
+FROM		ft_alpine:telegraf
+LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
+
+# Background on why "mkdir -p /run/nginx" is needed
+# https://github.com/gliderlabs/docker-alpine/issues/185
+# https://gitlab.alpinelinux.org/alpine/aports/-/merge_requests/14500
+RUN 		mkdir -p /run/nginx
+RUN			apk update && apk upgrade && apk add --no-cache nginx openssh
+
+EXPOSE		80 443 22
+ENTRYPOINT	["ngnix"]
