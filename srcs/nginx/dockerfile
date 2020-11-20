@@ -7,5 +7,7 @@ LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
 RUN 		mkdir -p /run/nginx
 RUN			apk update && apk upgrade && apk add --no-cache nginx openssh
 
+# https://stackoverflow.com/questions/42154249/difference-http-redirect-vs-reverse-proxy-in-nginx
 EXPOSE		80 443 22
-ENTRYPOINT	["ngnix"]
+ENTRYPOINT	["/bin/ash"]
+

@@ -7,3 +7,5 @@ EXPOSE		21
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management#Upgrade_a_Running_System
 # https://pkgs.alpinelinux.org/packages?name=telegraf&branch=edge&arch=x86_64
 # https://pkgs.alpinelinux.org/packages?name=vsftpd&branch=edge&arch=x86_64
+
+ENTRYPOINT	["/bin/ash"]

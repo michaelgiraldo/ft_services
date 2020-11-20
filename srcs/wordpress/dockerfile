@@ -1,24 +1,24 @@
 FROM	ft_alpine:telegraf
 LABEL	maintainer="Michael Giraldo <mgiraldo@student.42.org>"
 
-RUN		apk update && apk upgrade && apk add --no-cache php7 php7-common php7-iconv php7-json php7-gd php7-curl php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap php7-ctype php7-dom
-RUN 	apk add --no-cache bash curl less vim nginx ca-certificates git tzdata zip \
-    libmcrypt-dev zlib-dev gmp-dev \
-    freetype-dev libjpeg-turbo-dev libpng-dev \
-    php7-fpm php7-json php7-zlib php7-xml php7-xmlwriter php7-simplexml php7-pdo php7-phar php7-openssl \
-    php7-pdo_mysql php7-mysqli php7-session \
-    php7-gd php7-iconv php7-mcrypt php7-gmp php7-zip \
-    php7-curl php7-opcache php7-ctype php7-apcu \
-    php7-intl php7-bcmath php7-dom php7-mbstring php7-xmlreader mysql-client curl && apk add -u musl && \
-    rm -rf /var/cache/apk/*
+# Background on why "mkdir -p /run/nginx" is needed
+# https://github.com/gliderlabs/docker-alpine/issues/185
+# https://gitlab.alpinelinux.org/alpine/aports/-/merge_requests/14500
+RUN 		mkdir -p /run/nginx
 
+# https://make.wordpress.org/hosting/handbook/handbook/server-environment/
+# https://pkgs.alpinelinux.org/package/edge/community/x86_64/php7-common
+# https://www.php.net/manual/en/hash.installation.php >> As of PHP 7.4.0, the Hash extension is a core PHP extension, so it is always enabled.
+# https://www.php.net/manual/en/pcre.installation.php >> The PCRE extension is a core PHP extension, so it is always enabled
 
-WORKDIR /usr/share/
-ADD		http://wordpress.org/latest.tar.gz .
-RUN		tar -xzvf latest.tar.gz && rm latest.tar.gz && chown -R www-data:www-data wordpress/
-RUN		ln -s /usr/share/wordpress /var/www/localhost/htdocs
+RUN		    apk update && apk upgrade && apk add --no-cache nginx php-common php7-pecl-imagick 
+ 
+WORKDIR     /usr/share/
+ADD		    http://wordpress.org/latest.tar.gz .
+RUN		    tar -xzvf latest.tar.gz && rm latest.tar.gz && chown -R www-data:www-data wordpress/
+RUN		    ln -s /usr/share/wordpress /var/www/localhost/htdocs
 
-
-ENTRYPOINT	["mysql"]
+EXPOSE		5050
+ENTRYPOINT	["/bin/ash"]
 
 # https://github.com/docker-library/wordpress/blob/5125491823651bcd691faf415d836f911fea09cd/php7.4/fpm-alpine/Dockerfile
