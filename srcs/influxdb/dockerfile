@@ -1,19 +1,19 @@
-FROM		ft_alpine:telegraf
+FROM		alpine:ft_services
 LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
 
 # https://docs.influxdata.com/influxdb/v2.0/get-started/#start-with-influxdb-oss
 # Download InfluxDB v2.0 
-ADD			https://dl.influxdata.com/influxdb/releases/influxdb-2.0.0-rc.4_linux_amd64.tar.gz .
+ADD			https://dl.influxdata.com/influxdb/releases/influxdb-2.0.2_linux_amd64.tar.gz .
 
 # Unpackage contents to the current working directory
-RUN			tar xvzf influxdb-2.0.0-rc.4_linux_amd64.tar.gz && rm influxdb-2.0.0-rc.4_linux_amd64.tar.gz 
+RUN			tar xvzf influxdb-2.0.2_linux_amd64.tar.gz && rm influxdb-2.0.2_linux_amd64.tar.gz 
 
 # Alpine Linux does /bin/ash does not supprot curly barckets
 # https://lists.uclibc.org/pipermail/busybox/2011-July/076255.html
 # Copy the influx and influxd binary to your $PATH
 RUN			mv influxdb-2.0.0-rc.4_linux_amd64/influx /usr/local/bin/ && mv influxdb-2.0.0-rc.4_linux_amd64/influxd /usr/local/bin/ && rm -r influxdb-2.0.0-rc.4_linux_amd64/
 
-ENTRYPOINT	["influxdb"]
+#ENTRYPOINT	["entrypoint.sh"]
 EXPOSE		8086
 
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management#Upgrade_a_Running_System

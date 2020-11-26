@@ -1,13 +1,12 @@
-FROM		ft_alpine:telegraf
+FROM		alpine:ft_services
 LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
 
 # Background on why "mkdir -p /run/nginx" is needed
 # https://github.com/gliderlabs/docker-alpine/issues/185
 # https://gitlab.alpinelinux.org/alpine/aports/-/merge_requests/14500
 RUN 		mkdir -p /run/nginx
-RUN			apk update && apk upgrade && apk add --no-cache nginx openssh
+RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc openssh
 
 # https://stackoverflow.com/questions/42154249/difference-http-redirect-vs-reverse-proxy-in-nginx
 EXPOSE		80 443 22
-ENTRYPOINT	["/bin/ash"]
-
+ENTRYPOINT	["entrypoint.sh"]

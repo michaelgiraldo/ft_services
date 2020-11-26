@@ -1,0 +1,28 @@
+secretGenerator:
+- name: mysql-pass
+  literals:
+  - password=YOUR_PASSWORD
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-secret
+  labels:
+    app: grafana
+type: Opaque
+stringData:
+  GF_SECURITY_ADMIN_USER: user
+  GF_SECURITY_ADMIN_PASSWORD: password
+
+
+resources:
+  - ftps.yaml
+  - grafana.yaml
+  - influxdb.yaml
+  - metallb.yaml
+  - mysql.yaml
+  - nginx.yaml
+  - phpmyadmin.yaml
+  - wordpress.yaml

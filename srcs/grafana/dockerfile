@@ -1,4 +1,8 @@
-FROM		ft_alpine:telegraf
+FROM		alpine:ft_services
 LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
-RUN			apk update && apk upgrade && apk add --no-cache grafana
-ENTRYPOINT	["grafana"]
+RUN			apk update && apk upgrade && apk add --no-cache \
+            grafana \
+            grafana-openrc \
+            grafana-image-renderer \
+            grafana-image-renderer-openrc
+ENTRYPOINT	["entrypoint.sh"]

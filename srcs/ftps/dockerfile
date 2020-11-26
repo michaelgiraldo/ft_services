@@ -1,11 +1,30 @@
-FROM		ft_alpine:telegraf
+FROM		alpine:ft_services
 LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
-RUN			apk update && apk upgrade && apk add --no-cache vsftpd
-ENTRYPOINT	["vsftpd"]
-EXPOSE		21
+RUN			apk update && apk upgrade && apk add --no-cache vsftpd vsftpd-doc openssl
+
+COPY        srcs/ftps/openssl.conf /etc/ssl/openssl.conf
+RUN         openssl req -new -keyout /etc/vsftpd/vsftpd.pem -out /etc/vsftpd/vsftpd.pem -config etc/ssl/openssl.conf
+
+# Copy configuration files and start up script (entrypoint.sh)
+COPY        srcs/ftps/vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY        srcs/ftps/telegraf.conf /etc/telegraf/telegraf.conf
+COPY        srcs/ftps/entrypoint.sh /
+
+# Make FTP directory and change ownership
+RUN         mkdir -p /home/vsftpd/
+RUN         chown -R ftp:ftp /home/vsftpd/
+
+RUN         chmod -R 775 entrypoint.sh
+
+EXPOSE		20 21
+
+ENTRYPOINT	["./entrypoint.sh"]
+
+# https://wiki.alpinelinux.org/wiki/FTP
+# https://github.com/fauria/docker-vsftpd/blob/master/Dockerfile
+# https://github.com/onjin/docker-alpine-vsftpd/blob/master/Dockerfile
+# https://github.com/fauria/docker-vsftpd/pull/42/files
 
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management#Upgrade_a_Running_System
 # https://pkgs.alpinelinux.org/packages?name=telegraf&branch=edge&arch=x86_64
 # https://pkgs.alpinelinux.org/packages?name=vsftpd&branch=edge&arch=x86_64
-
-ENTRYPOINT	["/bin/ash"]

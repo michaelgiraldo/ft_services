@@ -1,5 +1,5 @@
-FROM	ft_alpine:telegraf
-LABEL	maintainer="Michael Giraldo <mgiraldo@student.42.org>"
+FROM		alpine:ft_services
+LABEL       maintainer="Michael Giraldo <mgiraldo@student.42.org>"
 
 # Background on why "mkdir -p /run/nginx" is needed
 # https://github.com/gliderlabs/docker-alpine/issues/185
@@ -11,14 +11,15 @@ RUN 		mkdir -p /run/nginx
 # https://www.php.net/manual/en/hash.installation.php >> As of PHP 7.4.0, the Hash extension is a core PHP extension, so it is always enabled.
 # https://www.php.net/manual/en/pcre.installation.php >> The PCRE extension is a core PHP extension, so it is always enabled
 
-RUN		    apk update && apk upgrade && apk add --no-cache nginx php-common php7-pecl-imagick 
+RUN		    apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php-common php7-pecl-imagick 
  
-WORKDIR     /usr/share/
+WORKDIR     /usr/share/webapps
 ADD		    http://wordpress.org/latest.tar.gz .
-RUN		    tar -xzvf latest.tar.gz && rm latest.tar.gz && chown -R www-data:www-data wordpress/
+RUN		    tar -xzvf latest.tar.gz && rm latest.tar.gz
+RUN         && chown -R www-data:www-data wordpress/
 RUN		    ln -s /usr/share/wordpress /var/www/localhost/htdocs
 
 EXPOSE		5050
-ENTRYPOINT	["/bin/ash"]
+ENTRYPOINT	["entrypoint.sh"]
 
 # https://github.com/docker-library/wordpress/blob/5125491823651bcd691faf415d836f911fea09cd/php7.4/fpm-alpine/Dockerfile
