@@ -15,7 +15,8 @@ RUN          openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj '/C=FR/ST
 RUN         adduser ft_services -D && echo "ft_services:pass" | chpasswd
 
 # Copy configuration files and start up script (entrypoint.sh)
-COPY        srcs/ftps/proftpd_tls.conf /etc/proftpd/modules.d/tls.conf 
+COPY        srcs/ftps/proftpd_tls.conf /etc/proftpd/modules.d/tls.conf
+COPY        srcs/ftps/proftpd.conf /etc/proftpd/proftpd.conf 
 COPY        srcs/ftps/telegraf.conf /etc/telegraf/telegraf.conf
 
 # Make FTP directory and change ownership
