@@ -5,9 +5,9 @@ RUN			apk update && apk upgrade && apk add --no-cache \
             proftpd proftpd-doc proftpd-mod_tls proftpd-utils perl \
             openssl
 
-#COPY        srcs/ftps/openssl.conf /etc/ssl/openssl.conf
-RUN          openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj '/C=FR/ST=PAR/L=PAR/O=42/CN=user' -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.pem
-#RUN         openssl req -new -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.pem -config etc/ssl/openssl.conf
+RUN          openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+-subj '/C=US/ST=CALIFORNIA/L=SILICON VALLEY/O=42/CN=HITCHIKERS GUIDE TO PROGRAMMING' \
+-keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.pem
 
 # Alpine Linux uses busybox
 # https://busybox.net/downloads/BusyBox.html

@@ -11,10 +11,12 @@ spec:
   selector:
     app: ftps
   ports:
-  - port: 21
-    targetPort: 21
-    name: ftps
-
+  - {port: 21, name: ftps}
+  - {port: 49201, name: pavs1}
+  - {port: 49202, name: pavs2}
+  - {port: 49203, name: pavs3}
+  - {port: 49204, name: pavs4}
+  - {port: 49205, name: pavs5}
 ---
 
 apiVersion: apps/v1
@@ -38,6 +40,13 @@ spec:
         name: ftps
         imagePullPolicy: Never
         command: ["sh", "-c", "tail -f /dev/null"]
+        ports:
+        - containerPort: 21
+        - containerPort: 49201
+        - containerPort: 49202
+        - containerPort: 49203
+        - containerPort: 49204
+        - containerPort: 49205
         env:
           - name: IP
             valueFrom:

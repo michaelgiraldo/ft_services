@@ -1,0 +1,83 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ftps
+  namespace: default
+  selfLink: /api/v1/namespaces/default/services/ftps
+  uid: fdc09b1c-7bbd-4def-9ef4-09484467ddef
+  resourceVersion: '863'
+  creationTimestamp: '2020-11-30T06:25:08Z'
+  labels:
+    app: ftps
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"metallb.universe.tf/allow-shared-ip":"sharing
+      key"},"labels":{"app":"ftps"},"name":"ftps","namespace":"default"},"spec":{"ports":[{"name":"ftps","port":21,"targetPort":21},{"name":"ftps-data","port":21000,"targetPort":21000}],"selector":{"app":"ftps"},"type":"LoadBalancer"}}
+    metallb.universe.tf/allow-shared-ip: sharing key
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: v1
+      time: '2020-11-30T06:25:08Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:kubectl.kubernetes.io/last-applied-configuration': {}
+            'f:metallb.universe.tf/allow-shared-ip': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+        'f:spec':
+          'f:externalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":21,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":21000,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector':
+            .: {}
+            'f:app': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+    - manager: controller
+      operation: Update
+      apiVersion: v1
+      time: '2020-11-30T06:25:19Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:loadBalancer':
+            'f:ingress': {}
+spec:
+  ports:
+    - name: ftps
+      protocol: TCP
+      port: 21
+      targetPort: 21
+      nodePort: 31601
+    - name: ftps-data
+      protocol: TCP
+      port: 21000
+      targetPort: 21000
+      nodePort: 32513
+  selector:
+    app: ftps
+  clusterIP: 10.106.14.213
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+status:
+  loadBalancer:
+    ingress:
+      - ip: 192.168.49.2

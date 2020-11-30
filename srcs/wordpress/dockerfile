@@ -16,7 +16,7 @@ RUN		    apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php-
 WORKDIR     /usr/share/webapps
 ADD		    http://wordpress.org/latest.tar.gz .
 RUN		    tar -xzvf latest.tar.gz && rm latest.tar.gz
-RUN         && chown -R www-data:www-data wordpress/
+#RUN         chown -R www-data:www-data wordpress/
 RUN		    ln -s /usr/share/wordpress /var/www/localhost/htdocs
 
 EXPOSE		5050

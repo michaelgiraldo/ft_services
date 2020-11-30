@@ -1,0 +1,127 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ftps-service
+  namespace: default
+  selfLink: /api/v1/namespaces/default/services/ftps-service
+  uid: b25d408d-3cfd-44b4-91ae-1e5e2cb9c2f4
+  resourceVersion: '586'
+  creationTimestamp: '2020-11-30T06:51:16Z'
+  labels:
+    app: ftps
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"metallb.universe.tf/allow-shared-ip":"sharing
+      key"},"labels":{"app":"ftps"},"name":"ftps-service","namespace":"default"},"spec":{"ports":[{"name":"ftps","port":21},{"name":"pavs1","port":49201},{"name":"pavs2","port":49202},{"name":"pavs3","port":49203},{"name":"pavs4","port":49204},{"name":"pavs5","port":49205}],"selector":{"app":"ftps"},"type":"LoadBalancer"}}
+    metallb.universe.tf/allow-shared-ip: sharing key
+  managedFields:
+    - manager: controller
+      operation: Update
+      apiVersion: v1
+      time: '2020-11-30T06:51:16Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:loadBalancer':
+            'f:ingress': {}
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: v1
+      time: '2020-11-30T06:51:16Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:kubectl.kubernetes.io/last-applied-configuration': {}
+            'f:metallb.universe.tf/allow-shared-ip': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+        'f:spec':
+          'f:externalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":21,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":49201,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":49202,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":49203,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":49204,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":49205,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector':
+            .: {}
+            'f:app': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+spec:
+  ports:
+    - name: ftps
+      protocol: TCP
+      port: 21
+      targetPort: 21
+      nodePort: 32730
+    - name: pavs1
+      protocol: TCP
+      port: 49201
+      targetPort: 49201
+      nodePort: 31796
+    - name: pavs2
+      protocol: TCP
+      port: 49202
+      targetPort: 49202
+      nodePort: 31903
+    - name: pavs3
+      protocol: TCP
+      port: 49203
+      targetPort: 49203
+      nodePort: 32022
+    - name: pavs4
+      protocol: TCP
+      port: 49204
+      targetPort: 49204
+      nodePort: 31103
+    - name: pavs5
+      protocol: TCP
+      port: 49205
+      targetPort: 49205
+      nodePort: 30475
+  selector:
+    app: ftps
+  clusterIP: 10.102.207.18
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+status:
+  loadBalancer:
+    ingress:
+      - ip: 192.168.49.2

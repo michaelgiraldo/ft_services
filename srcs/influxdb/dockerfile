@@ -11,7 +11,7 @@ RUN			tar xvzf influxdb-2.0.2_linux_amd64.tar.gz && rm influxdb-2.0.2_linux_amd6
 # Alpine Linux does /bin/ash does not supprot curly barckets
 # https://lists.uclibc.org/pipermail/busybox/2011-July/076255.html
 # Copy the influx and influxd binary to your $PATH
-RUN			mv influxdb-2.0.0-rc.4_linux_amd64/influx /usr/local/bin/ && mv influxdb-2.0.0-rc.4_linux_amd64/influxd /usr/local/bin/ && rm -r influxdb-2.0.0-rc.4_linux_amd64/
+RUN			mv influxdb-2.0.2_linux_amd64/influx /usr/local/bin/ && mv influxdb-2.0.2_linux_amd64/influxd /usr/local/bin/ && rm -r influxdb-2.0.2_linux_amd64/
 
 #ENTRYPOINT	["entrypoint.sh"]
 EXPOSE		8086
