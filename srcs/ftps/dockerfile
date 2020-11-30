@@ -1,26 +1,34 @@
 FROM		alpine:ft_services
 LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
-RUN			apk update && apk upgrade && apk add --no-cache vsftpd vsftpd-doc openssl
+RUN         mkdir -p /run/proftpd/
+RUN			apk update && apk upgrade && apk add --no-cache \
+            proftpd proftpd-doc proftpd-mod_tls proftpd-utils perl \
+            openssl
 
-COPY        srcs/ftps/openssl.conf /etc/ssl/openssl.conf
-RUN         openssl req -new -keyout /etc/vsftpd/vsftpd.pem -out /etc/vsftpd/vsftpd.pem -config etc/ssl/openssl.conf
+#COPY        srcs/ftps/openssl.conf /etc/ssl/openssl.conf
+RUN          openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj '/C=FR/ST=PAR/L=PAR/O=42/CN=user' -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.pem
+#RUN         openssl req -new -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.pem -config etc/ssl/openssl.conf
+
+# Alpine Linux uses busybox
+# https://busybox.net/downloads/BusyBox.html
+# http://linux-training.be/security/ch03.html
+RUN         adduser ft_services -D && echo "ft_services:pass" | chpasswd
 
 # Copy configuration files and start up script (entrypoint.sh)
-COPY        srcs/ftps/vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY        srcs/ftps/proftpd_tls.conf /etc/proftpd/modules.d/tls.conf 
 COPY        srcs/ftps/telegraf.conf /etc/telegraf/telegraf.conf
-COPY        srcs/ftps/entrypoint.sh /
 
 # Make FTP directory and change ownership
-RUN         mkdir -p /home/vsftpd/
-RUN         chown -R ftp:ftp /home/vsftpd/
-
+COPY        srcs/ftps/entrypoint.sh /
 RUN         chmod -R 775 entrypoint.sh
 
-EXPOSE		20 21
+EXPOSE		21 49201-49205
 
 ENTRYPOINT	["./entrypoint.sh"]
 
-# https://wiki.alpinelinux.org/wiki/FTP
+#https://github.com/besn0847/ftpd/blob/master/Dockerfile
+
+# https://wiki.alpinelinux.org/wiki/FTPa
 # https://github.com/fauria/docker-vsftpd/blob/master/Dockerfile
 # https://github.com/onjin/docker-alpine-vsftpd/blob/master/Dockerfile
 # https://github.com/fauria/docker-vsftpd/pull/42/files
