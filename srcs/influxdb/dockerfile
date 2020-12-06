@@ -13,8 +13,15 @@ RUN			tar xvzf influxdb-2.0.2_linux_amd64.tar.gz && rm influxdb-2.0.2_linux_amd6
 # Copy the influx and influxd binary to your $PATH
 RUN			mv influxdb-2.0.2_linux_amd64/influx /usr/local/bin/ && mv influxdb-2.0.2_linux_amd64/influxd /usr/local/bin/ && rm -r influxdb-2.0.2_linux_amd64/
 
-#ENTRYPOINT	["entrypoint.sh"]
 EXPOSE		8086
+
+
+# Copy configuration files and start up script (entrypoint.sh)
+COPY        srcs/influxdb/entrypoint.sh /
+COPY        srcs/influxdb/telegraf.conf /etc/telegraf/telegraf.conf
+#COPY        srcs/influxdb/configs /root/.influxdbv2/configs
+RUN         chmod -R 775 entrypoint.sh
+ENTRYPOINT	["./entrypoint.sh"]
 
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management#Upgrade_a_Running_System
 

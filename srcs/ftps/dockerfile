@@ -23,7 +23,7 @@ COPY        srcs/ftps/telegraf.conf /etc/telegraf/telegraf.conf
 COPY        srcs/ftps/entrypoint.sh /
 RUN         chmod -R 775 entrypoint.sh
 
-EXPOSE		21 49201-49205
+EXPOSE		20-21 49201-49205
 
 ENTRYPOINT	["./entrypoint.sh"]
 

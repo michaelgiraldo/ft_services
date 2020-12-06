@@ -11,6 +11,7 @@ spec:
   selector:
     app: ftps
   ports:
+  - {port: 20, name: ftps-data}
   - {port: 21, name: ftps}
   - {port: 49201, name: pavs1}
   - {port: 49202, name: pavs2}
@@ -39,8 +40,9 @@ spec:
       - image: ftps:ft_services
         name: ftps
         imagePullPolicy: Never
-        command: ["sh", "-c", "tail -f /dev/null"]
+#        #command: ["sh", "-c", "tail -f /dev/null"]
         ports:
+        - containerPort: 20
         - containerPort: 21
         - containerPort: 49201
         - containerPort: 49202

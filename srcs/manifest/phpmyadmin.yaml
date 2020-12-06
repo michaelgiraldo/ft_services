@@ -34,6 +34,6 @@ spec:
       - image: phpmyadmin:ft_services
         name: phpmyadmin
         imagePullPolicy: Never
-        command: ["sh", "-c", "tail -f /dev/null"] 
+        #command: ["sh", "-c", "tail -f /dev/null"] 
         ports:
         - containerPort: 5000

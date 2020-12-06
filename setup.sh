@@ -29,7 +29,7 @@ docker build --tag alpine:ft_services -f srcs/alpine/dockerfile . & wait
 # build custom application image 
 docker build --tag ftps:ft_services -f srcs/ftps/dockerfile . & wait
 #docker build --tag grafana:ft_services -f srcs/grafana/dockerfile . & wait
-#docker build --tag influxdb:ft_services -f srcs/influxdb/dockerfile . & wait
+docker build --tag influxdb:ft_services -f srcs/influxdb/dockerfile . & wait
 #docker build --tag mysql:ft_services -f srcs/mysql/dockerfile . & wait
 #docker build --tag nginx:ft_services -f srcs/nginx/dockerfile . & wait
 #docker build --tag phpmyadmin:ft_services -f srcs/phpmyadmin/dockerfile . & wait

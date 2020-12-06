@@ -38,7 +38,6 @@ spec:
       - image: grafana:ft_services
         name: grafana
         imagePullPolicy: Never
-        command: ["sh", "-c", "tail -f /dev/null"]
         ports:
         - containerPort: 3000
         envFrom:

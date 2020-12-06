@@ -42,7 +42,7 @@ spec:
       - image: nginx:ft_services
         name: nginx
         imagePullPolicy: Never
-        command: ["sh", "-c", "tail -f /dev/null"]
+        #command: ["sh", "-c", "tail -f /dev/null"]
         ports:
         - containerPort: 80
         - containerPort: 443

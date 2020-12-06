@@ -12,8 +12,9 @@ spec:
     app: mysql
     tier: mysql
 ---
+
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mysql
   labels:
@@ -35,7 +36,6 @@ spec:
       - image: mysql:ft_services
         name: mysql
         imagePullPolicy: Never
-        command: ["sh", "-c", "tail -f /dev/null"]
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
