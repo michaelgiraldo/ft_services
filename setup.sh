@@ -3,7 +3,9 @@
 # https://minikube.sigs.k8s.io/docs/commands/start/
 # Start minikube with addons
 #minikube start --addons metallb metrics-server dashboard
-minikube start --memory 6g --addons metallb --addons metrics-server --addons dashboard & wait
+#minikube start --memory 6g --addons metallb --addons metrics-server --addons dashboard & wait
+minikube start --addons metallb --addons metrics-server --addons dashboard & wait
+
 
 #https://minikube.sigs.k8s.io/docs/commands/addons/
 # Enable minikube addons 
@@ -28,7 +30,7 @@ docker build --tag alpine:ft_services -f srcs/alpine/dockerfile . & wait
 
 # build custom application image 
 docker build --tag ftps:ft_services -f srcs/ftps/dockerfile . & wait
-#docker build --tag grafana:ft_services -f srcs/grafana/dockerfile . & wait
+docker build --tag grafana:ft_services -f srcs/grafana/dockerfile . & wait
 docker build --tag influxdb:ft_services -f srcs/influxdb/dockerfile . & wait
 #docker build --tag mysql:ft_services -f srcs/mysql/dockerfile . & wait
 #docker build --tag nginx:ft_services -f srcs/nginx/dockerfile . & wait

@@ -9,4 +9,10 @@ RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc openssh
 
 # https://stackoverflow.com/questions/42154249/difference-http-redirect-vs-reverse-proxy-in-nginx
 EXPOSE		80 443 22
-ENTRYPOINT	["entrypoint.sh"]
+
+# Copy configuration files and start up script (entrypoint.sh)
+COPY        srcs/nginx/entrypoint.sh /
+COPY        srcs/nginx/telegraf.conf /etc/telegraf/telegraf.conf
+RUN         chmod -R 775 entrypoint.sh
+
+ENTRYPOINT	[./entrypoint.sh"]

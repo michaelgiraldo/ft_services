@@ -1,8 +1,12 @@
 FROM		alpine:ft_services
 LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
+RUN         mkdir -p /var/lib/grafana
 RUN			apk update && apk upgrade && apk add --no-cache \
             grafana \
             grafana-openrc \
             grafana-image-renderer \
             grafana-image-renderer-openrc
-ENTRYPOINT	["entrypoint.sh"]
+COPY        srcs/grafana/telegraf.conf /etc/telegraf/telegraf.conf
+COPY        srcs/grafana/entrypoint.sh /
+RUN         chmod -R 775 entrypoint.sh
+ENTRYPOINT	["./entrypoint.sh"]

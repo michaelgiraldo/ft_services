@@ -1,4 +1,12 @@
 FROM		alpine:ft_services
 LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
-RUN			apk update && apk upgrade && apk add --no-cache mysql
-ENTRYPOINT	["entrypoint.sh"]
+RUN			apk update && apk upgrade && apk add --no-cache mysql mysql-client
+
+# Copy configuration files and start up script (entrypoint.sh)
+COPY        srcs/mysql/entrypoint.sh /
+COPY        srcs/mysql/telegraf.conf /etc/telegraf/telegraf.conf
+RUN         chmod -R 775 entrypoint.sh
+
+ENTRYPOINT	[./entrypoint.sh"]
+
+# https://wiki.alpinelinux.org/wiki/MariaDB

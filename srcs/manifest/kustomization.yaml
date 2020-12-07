@@ -1,12 +1,12 @@
 resources:
   - ftps.yaml
-#  - grafana.yaml
-#  - influxdb.yaml
+  - grafana.yaml
+  - influxdb.yaml
   - metallb.yaml
-#  - mysql.yaml
-#  - nginx.yaml
-#  - phpmyadmin.yaml
-#  - wordpress.yaml
+  - mysql.yaml
+  - nginx.yaml
+  - phpmyadmin.yaml
+  - wordpress.yaml
 
 secretGenerator:
 - name: mysql-pass

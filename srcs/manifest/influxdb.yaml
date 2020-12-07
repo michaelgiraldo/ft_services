@@ -7,10 +7,10 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 8086
-    targetPort: 8086
-    protocol: TCP
-    name: http
+    - port: 8086
+      targetPort: 8086
+      protocol: TCP
+      name: http
   selector:
     app: influxdb
 ---
@@ -22,13 +22,13 @@ metadata:
     app: influxdb
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
 ---
 apiVersion: apps/v1
-kind: Stateful
+kind: StatefulSet
 metadata:
   name: influxdb
   labels:
@@ -38,21 +38,23 @@ spec:
   selector:
     matchLabels:
       app: influxdb
+  serviceName: influxdb
   template:
     metadata:
       labels:
         app: influxdb
     spec:
       containers:
-      - image: influxdb:ft_services
-        name: influxdb
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 8086
-        volumeMounts:
-        - name: influxdb
-          mountPath: /var/lib/influxdb
+        - image: influxdb:ft_services
+          name: influxdb
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8086
+              name: influxdb
+          volumeMounts:
+            - name: influxdb
+              mountPath: /root/.influxdbv2
       volumes:
-      - name: influxdb
-        persistentVolumeClaim:
-          claimName: influxdb-pv-claim
+        - name: influxdb
+          persistentVolumeClaim:
+            claimName: influxdb-pv-claim

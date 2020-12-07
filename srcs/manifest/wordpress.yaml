@@ -47,8 +47,6 @@ spec:
       - image: wordpress:ft_services
         name: wordpress
         imagePullPolicy: Never
-#https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#notes
-        #command: ["sh", "-c", "tail -f /dev/null"]
         env:
         - name: WORDPRESS_DB_HOST
           value: wordpress-mysql

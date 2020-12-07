@@ -6,7 +6,7 @@ echo "FT_SERVICES - INFLUXDB CONTAINTER"
 influxd --vault-token=BNqaEXjN6p0X2ihb1mRzO8vqN2DjolZuVXnJ22V60yLykxantjdnfniI96IB1LuyyZaghM9V_lg1bsQRbq4Xlw== & sleep 10
 
 # https://docs.influxdata.com/influxdb/v2.0/reference/cli/influx/setup/#flags
-influx setup -f -b 42bucket -o 42org  -u user -p password -t BNqaEXjN6p0X2ihb1mRzO8vqN2DjolZuVXnJ22V60yLykxantjdnfniI96IB1LuyyZaghM9V_lg1bsQRbq4Xlw==
+influx setup -f -b 42bucket -o 42org  -u user -p password -t BNqaEXjN6p0X2ihb1mRzO8vqN2DjolZuVXnJ22V60yLykxantjdnfniI96IB1LuyyZaghM9V_lg1bsQRbq4Xlw== & wait
 
 telegraf
 

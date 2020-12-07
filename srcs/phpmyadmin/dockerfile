@@ -13,4 +13,10 @@ RUN 		mkdir -p /run/nginx
 
 RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php-common phpmyadmin 
 EXPOSE		5000
-ENTRYPOINT	["entrypoint.sh"]
+
+# Copy configuration files and start up script (entrypoint.sh)
+COPY        srcs/phpmyadmin/entrypoint.sh /
+COPY        srcs/phpmyadmin/telegraf.conf /etc/telegraf/telegraf.conf
+RUN         chmod -R 775 entrypoint.sh
+
+ENTRYPOINT	[./entrypoint.sh"]
