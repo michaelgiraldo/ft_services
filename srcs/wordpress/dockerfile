@@ -19,12 +19,13 @@ RUN		    tar -xzvf latest.tar.gz && rm latest.tar.gz
 #RUN         chown -R www-data:www-data wordpress/
 RUN		    ln -s /usr/share/wordpress /var/www/localhost/htdocs
 
-EXPOSE		5050
-
+WORKDIR     /
 # Copy configuration files and start up script (entrypoint.sh)
 COPY        srcs/wordpress/entrypoint.sh /
 COPY        srcs/wordpress/telegraf.conf /etc/telegraf/telegraf.conf
 RUN         chmod -R 775 entrypoint.sh
+
+EXPOSE		5050
 
 ENTRYPOINT	["./entrypoint.sh"]
 
