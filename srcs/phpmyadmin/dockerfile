@@ -19,4 +19,4 @@ COPY        srcs/phpmyadmin/entrypoint.sh /
 COPY        srcs/phpmyadmin/telegraf.conf /etc/telegraf/telegraf.conf
 RUN         chmod -R 775 entrypoint.sh
 
-ENTRYPOINT	[./entrypoint.sh"]
+ENTRYPOINT	["./entrypoint.sh"]

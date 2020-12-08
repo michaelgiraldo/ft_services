@@ -1,3 +1,5 @@
+
+# CREATE wodpress DATABASE and wordpress databas admin account 
 CREATE DATABASE wordpress;
 CREATE USER 'wordpress'@'localhost';
 GRANT ALL PRIVILEGES
@@ -15,7 +17,6 @@ IDENTIFIED BY PASSWORD '*452911C4562D3836367E289336A37A779B5BC2EE' WITH GRANT OP
 GRANT PROXY ON ''@'%' TO 'dbadmin'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 exit
-
 
 
 #+-----------+------------+-------------------------------------------+-----------------------------------------------+

@@ -15,4 +15,4 @@ COPY        srcs/nginx/entrypoint.sh /
 COPY        srcs/nginx/telegraf.conf /etc/telegraf/telegraf.conf
 RUN         chmod -R 775 entrypoint.sh
 
-ENTRYPOINT	[./entrypoint.sh"]
+ENTRYPOINT	["./entrypoint.sh"]

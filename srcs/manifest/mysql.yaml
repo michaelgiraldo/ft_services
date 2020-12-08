@@ -10,7 +10,6 @@ spec:
     - port: 3306
   selector:
     app: mysql
-    tier: mysql
 ---
 
 apiVersion: apps/v1
@@ -23,25 +22,16 @@ spec:
   selector:
     matchLabels:
       app: mysql
-      tier: mysql
-  strategy:
-    type: Recreate
+  serviceName: mysql
   template:
     metadata:
       labels:
-        app: ft_services
-        tier: mysql
+        app: mysql
     spec:
       containers:
       - image: mysql:ft_services
         name: mysql
         imagePullPolicy: Never
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: password
         ports:
         - containerPort: 3306
           name: mysql
