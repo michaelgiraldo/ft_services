@@ -2,5 +2,6 @@
 echo "FT_SERVICES - NGINX CONTAINTER"
 nginx -t
 nginx
-telegraf
+#php-fpm7
+telegraf &
 tail -f /dev/null

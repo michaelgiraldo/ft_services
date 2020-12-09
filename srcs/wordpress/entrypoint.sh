@@ -2,5 +2,6 @@
 echo "FT_SERVICES - WORDPRESS CONTAINTER"
 nginx -t
 nginx
-telegraf
+php-fpm7
+telegraf &
 tail -f /dev/null

@@ -1,5 +1,7 @@
 #!/bin/ash
 echo "FT_SERVICES - phpMyAdmin CONTAINTER"
-
-telegraf
+nginx -t
+nginx
+php-fpm7
+telegraf &
 tail -f /dev/null

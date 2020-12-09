@@ -11,13 +11,13 @@ RUN 		mkdir -p /run/nginx
 # https://pkgs.alpinelinux.org/package/edge/community/x86_64/php7-common
 # https://www.php.net/manual/en/libxml.installation.php >> The libxml extension is enabled by default
 
-RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php-common phpmyadmin 
+RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php7-fpm php-common phpmyadmin 
 EXPOSE		5000
 
 # Copy configuration files and start up script (entrypoint.sh)
 COPY        srcs/phpmyadmin/entrypoint.sh /
 COPY        srcs/phpmyadmin/telegraf.conf /etc/telegraf/telegraf.conf
-COPY        srcs/wordpress/nginx.conf /etc/nginx/conf.d/default.conf
+COPY        srcs/phpmyadmin/nginx.conf /etc/nginx/conf.d/default.conf
 RUN         chmod -R 775 entrypoint.sh
 
 ENTRYPOINT	["./entrypoint.sh"]
