@@ -3,8 +3,8 @@
 # https://minikube.sigs.k8s.io/docs/commands/start/
 # Start minikube with addons
 #minikube start --addons metallb metrics-server dashboard
-minikube start --cpus 4 --memory 12g --addons metallb --addons metrics-server --addons dashboard & wait
-#minikube start --addons metallb --addons metrics-server --addons dashboard & wait
+#minikube start --cpus 4 --memory 12g --addons metallb --addons metrics-server --addons dashboard & wait
+minikube start --addons metallb --addons metrics-server --addons dashboard & wait
 
 
 #https://minikube.sigs.k8s.io/docs/commands/addons/
