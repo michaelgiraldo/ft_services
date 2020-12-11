@@ -56,4 +56,4 @@ spec:
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
-          claimName: /usr/share/webapps/wordpress
+          claimName: wp-pv-claim

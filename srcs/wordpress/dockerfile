@@ -15,16 +15,12 @@ RUN		    apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php7
  
 WORKDIR     /usr/share/webapps
 ADD		    http://wordpress.org/latest.tar.gz .
-#RUN		    tar -xzvf latest.tar.gz && rm latest.tar.gz
 RUN		    tar -xpzvf latest.tar.gz && rm latest.tar.gz
-
-#RUN        chmod 644 -R wordpress/ && 
 RUN         chown nginx:nginx -R wordpress/
-#RUN        chown -R www-data:www-data wordpress/
-#RUN		ln -s /usr/share/wordpress /var/www/localhost/htdocs
 
 WORKDIR     /
 # Copy configuration files and start up script (entrypoint.sh)
+COPY        srcs/wordpress/wp-config.php /usr/share/webapps/wp-config.php
 COPY        srcs/wordpress/entrypoint.sh /
 COPY        srcs/wordpress/telegraf.conf /etc/telegraf/telegraf.conf
 COPY        srcs/wordpress/nginx.conf /etc/nginx/conf.d/default.conf
