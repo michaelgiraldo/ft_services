@@ -11,7 +11,7 @@ RUN 		mkdir -p /run/nginx
 # https://www.php.net/manual/en/hash.installation.php >> As of PHP 7.4.0, the Hash extension is a core PHP extension, so it is always enabled.
 # https://www.php.net/manual/en/pcre.installation.php >> The PCRE extension is a core PHP extension, so it is always enabled
 
-RUN		    apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php-common php7-pecl-imagick 
+RUN		    apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php7 php7-fpm php7-common php7-pecl-imagick 
  
 WORKDIR     /usr/share/webapps
 ADD		    http://wordpress.org/latest.tar.gz .

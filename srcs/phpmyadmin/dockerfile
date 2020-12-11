@@ -11,7 +11,10 @@ RUN 		mkdir -p /run/nginx
 # https://pkgs.alpinelinux.org/package/edge/community/x86_64/php7-common
 # https://www.php.net/manual/en/libxml.installation.php >> The libxml extension is enabled by default
 
-RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php7-fpm php-common phpmyadmin 
+RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php7 php7-fpm php7-common php7-pecl-imagick phpmyadmin 
+
+
+
 EXPOSE		5000
 
 # Copy configuration files and start up script (entrypoint.sh)

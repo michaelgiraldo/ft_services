@@ -12,6 +12,21 @@ spec:
     app: mysql
 ---
 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+  labels:
+    app: mysql
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -42,19 +57,7 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pv-claim
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pv-claim
-  labels:
-    app: mysql
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+
 
 # https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
 # https://blog.container-solutions.com/kubernetes-deployment-strategies#:~:text=recreate%3A%20terminate%20the%20old%20version,old%20version%20then%20switch%20traffic
