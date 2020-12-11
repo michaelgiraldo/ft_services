@@ -1,11 +1,11 @@
 resources:
-#  - ftps.yaml
-#  - grafana.yaml
+  - ftps.yaml
+  - grafana.yaml
   - influxdb.yaml
   - metallb.yaml
   - mysql.yaml
   - nginx.yaml
-#  - phpmyadmin.yaml
+  - phpmyadmin.yaml
   - wordpress.yaml
 
 secretGenerator:

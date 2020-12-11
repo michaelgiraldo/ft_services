@@ -11,16 +11,15 @@ RUN 		mkdir -p /run/nginx
 # https://www.php.net/manual/en/hash.installation.php >> As of PHP 7.4.0, the Hash extension is a core PHP extension, so it is always enabled.
 # https://www.php.net/manual/en/pcre.installation.php >> The PCRE extension is a core PHP extension, so it is always enabled
 
-RUN		    apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php7 php7-fpm php7-common php7-pecl-imagick 
- 
+RUN		    apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php7 php7-fpm php7-common php7-pecl-imagick php7-curl php7-gd php7-intl php7-mbstring php7-soap php7-xml php7-xmlrpc php7-zip php7-gettext php7-ssh2 php7-iconv php7-json php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql php7-posix php7-mcrypt php7-ldap php7-ctype php7-dom 
 WORKDIR     /usr/share/webapps
 ADD		    http://wordpress.org/latest.tar.gz .
 RUN		    tar -xpzvf latest.tar.gz && rm latest.tar.gz
+COPY        srcs/wordpress/wp-config.php /usr/share/webapps/wp-config.php
 RUN         chown nginx:nginx -R wordpress/
 
 WORKDIR     /
 # Copy configuration files and start up script (entrypoint.sh)
-COPY        srcs/wordpress/wp-config.php /usr/share/webapps/wp-config.php
 COPY        srcs/wordpress/entrypoint.sh /
 COPY        srcs/wordpress/telegraf.conf /etc/telegraf/telegraf.conf
 COPY        srcs/wordpress/nginx.conf /etc/nginx/conf.d/default.conf
