@@ -12,8 +12,8 @@ RUN 		mkdir -p /run/nginx
 # https://www.php.net/manual/en/libxml.installation.php >> The libxml extension is enabled by default
 
 RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php7 php7-fpm php7-common php7-pecl-imagick phpmyadmin 
-
-
+COPY        srcs/phpmyadmin/config.inc.php /etc/phpmyadmin/config.inc.php
+RUN         chown nginx:nginx -R /usr/share/webapps/phpmyadmin
 
 EXPOSE		5000
 
