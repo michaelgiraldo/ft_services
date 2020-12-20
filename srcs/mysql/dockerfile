@@ -1,6 +1,6 @@
 FROM		alpine:ft_services
 LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
-RUN			apk update && apk upgrade && apk add --no-cache mariadb mariadb-client 
+RUN			apk update && apk upgrade && apk add --no-cache mariadb mariadb-client nmap 
 
 # Copy configuration files and start up script (entrypoint.sh)
 COPY        srcs/mysql/entrypoint.sh /
@@ -10,6 +10,9 @@ RUN         chmod -R 775 entrypoint.sh
 RUN         /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
 COPY        srcs/mysql/db_user_create_script.sql /ft_services/mariadb/
+COPY        srcs/mysql/ft_services.cnf /etc/my.cnf
+
+EXPOSE      3306
 
 ENTRYPOINT	["./entrypoint.sh"]
 

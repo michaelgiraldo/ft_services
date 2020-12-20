@@ -1,3 +1,4 @@
+#https://stackoverflow.com/questions/10236000/allow-all-remote-connections-mysql
 
 # CREATE wodpress DATABASE and wordpress databas admin account 
 CREATE DATABASE wordpress;
@@ -14,7 +15,26 @@ GRANT ALL PRIVILEGES
 ON *.*
 TO 'dbadmin'@'localhost'
 IDENTIFIED BY PASSWORD '*452911C4562D3836367E289336A37A779B5BC2EE' WITH GRANT OPTION;
-GRANT PROXY ON ''@'%' TO 'dbadmin'@'localhost' WITH GRANT OPTION;
+GRANT PROXY ON ''@'localhost' TO 'dbadmin'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+exit
+
+# CREATE wodpress DATABASE and wordpress databas admin account 
+CREATE DATABASE wordpress;
+CREATE USER 'wordpress'@'%';
+GRANT ALL PRIVILEGES
+ON wordpress.*
+TO 'wordpress'@'%'
+IDENTIFIED BY PASSWORD '*EEC94D54E7FF47D5342385EB2DB45D73C57F6289';
+FLUSH PRIVILEGES;
+
+# Create dbamin user with sames privileges as root
+CREATE USER 'dbadmin'@'%';
+GRANT ALL PRIVILEGES
+ON *.*
+TO 'dbadmin'@'%'
+IDENTIFIED BY PASSWORD '*452911C4562D3836367E289336A37A779B5BC2EE' WITH GRANT OPTION;
+GRANT PROXY ON ''@'%' TO 'dbadmin'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 exit
 

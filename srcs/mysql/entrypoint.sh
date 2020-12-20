@@ -1,10 +1,11 @@
 #!/bin/ash
 
 #Start Telegraf
-telegraf &
+#telegraf &
 
 #Start MySQL
-/usr/bin/mysqld_safe --user=mysql --datadir=/var/lib/mysql & 
+#/usr/bin/mysqld_safe --user=mysql --datadir=/var/lib/mysql --port=3306 & 
+/usr/bin/mysqld --user=mysql --datadir=/var/lib/mysql --port=3306 & 
 sleep 2 
 
 #Check MariaDB has started
