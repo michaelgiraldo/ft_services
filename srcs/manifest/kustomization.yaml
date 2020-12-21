@@ -6,4 +6,4 @@ resources:
   - mysql.yaml
   - nginx.yaml
   - phpmyadmin.yaml
-#  - wordpress.yaml
+  - wordpress.yaml
