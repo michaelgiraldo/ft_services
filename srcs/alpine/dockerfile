@@ -12,6 +12,8 @@ RUN			apk update && apk upgrade && apk add --no-cache \
 			telegraf \
 			openrc \
 			bash \
-			telegraf-openrc
+			telegraf-openrc \
+			nmap \
+			openrc
 
 #EXPOSE 		8125/udp 8092/udp 8094

@@ -5,7 +5,7 @@ LABEL		maintainer="Michael Giraldo <mgiraldo@student.42.org>"
 # https://github.com/gliderlabs/docker-alpine/issues/185
 # https://gitlab.alpinelinux.org/alpine/aports/-/merge_requests/14500
 RUN 		mkdir -p /run/nginx
-RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc openssh openssl
+RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc openssh openssh-server openssl
 
 # Alpine Linux uses busybox
 # https://busybox.net/downloads/BusyBox.html
@@ -20,10 +20,12 @@ RUN          openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 EXPOSE		80 443 22
 
 # Copy configuration files and start up script (entrypoint.sh)
-COPY        srcs/nginx/index.html /var/www/localhost/htdocs/index.html
+#COPY        srcs/nginx/index.html /var/www/localhost/htdocs/index.html
+COPY        srcs/nginx/index.html /var/lib/nginx/html/index.html
 COPY        srcs/nginx/entrypoint.sh /
 COPY        srcs/nginx/telegraf.conf /etc/telegraf/telegraf.conf
-COPY        srcs/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+#COPY        srcs/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY        srcs/nginx/nginx.conf /etc/nginx/nginx.conf
 RUN         chmod -R 775 entrypoint.sh
 
 ENTRYPOINT	["./entrypoint.sh"]
