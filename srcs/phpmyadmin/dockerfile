@@ -13,6 +13,7 @@ RUN 		mkdir -p /run/nginx
 
 RUN			apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php7 php7-fpm php7-common php7-pecl-imagick phpmyadmin 
 COPY        srcs/phpmyadmin/config.inc.php /etc/phpmyadmin/config.inc.php
+RUN         mkdir -p /usr/share/webapps/phpmyadmin/tmp/
 RUN         chown nginx:nginx -R /etc/phpmyadmin
 RUN         chown nginx:nginx -R /usr/share/webapps/phpmyadmin
 

@@ -15,7 +15,7 @@ RUN		    apk update && apk upgrade && apk add --no-cache nginx nginx-openrc php7
 WORKDIR     /usr/share/webapps
 ADD		    http://wordpress.org/latest.tar.gz .
 RUN		    tar -xpzvf latest.tar.gz && rm latest.tar.gz
-COPY        srcs/wordpress/wp-config.php /usr/share/webapps/wp-config.php
+COPY        srcs/wordpress/wp-config.php /usr/share/webapps/wordpress/wp-config.php
 RUN         chown nginx:nginx -R wordpress/
 
 WORKDIR     /
