@@ -6,7 +6,7 @@
 #minikube start --cpus 4 --memory 12g --addons metallb --addons metrics-server --addons dashboard & wait
 minikube start --cpus 4 --memory 16g --addons metallb --addons metrics-server --addons dashboard & wait
 
-
+sleep 2
 #https://minikube.sigs.k8s.io/docs/commands/addons/
 # Enable minikube addons 
 # minikube addons enable metallb
@@ -24,9 +24,11 @@ eval $(minikube -p minikube docker-env)
 # Run a kubectl binary matching the cluster version
 # https://minikube.sigs.k8s.io/docs/commands/kubectl/
 # minikube kubectl
+sleep 2
 
 # build custom Alpine base image
 docker build --tag alpine:ft_services -f srcs/alpine/dockerfile . & wait
+
 
 # build custom application image 
 docker build --tag ftps:ft_services -f srcs/ftps/dockerfile . & wait

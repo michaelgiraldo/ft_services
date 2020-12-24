@@ -12,19 +12,7 @@ spec:
     - port: 5050
   selector:
     app: wordpress
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: wp-pv-claim
-  labels:
-    app: wordpress
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,10 +38,3 @@ spec:
         ports:
         - containerPort: 5050
           name: wordpress
-        volumeMounts:
-        - name: wordpress-persistent-storage
-          mountPath: /usr/share/webapps/wordpress
-      volumes:
-      - name: wordpress-persistent-storage
-        persistentVolumeClaim:
-          claimName: wp-pv-claim
