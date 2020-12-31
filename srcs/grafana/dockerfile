@@ -10,3 +10,7 @@ COPY        srcs/grafana/telegraf.conf /etc/telegraf/telegraf.conf
 COPY        srcs/grafana/entrypoint.sh /
 RUN         chmod -R 775 entrypoint.sh
 ENTRYPOINT	["./entrypoint.sh"]
+
+# Video How to Build Grafana Dashboard for InfluxDB 2.0.X
+# https://youtu.be/ohtUVe_B7o8
+# https://grafana.com/blog/2020/08/11/new-in-grafana-7.1-gain-new-data-insights-with-influxdb-and-flux-query-support/
